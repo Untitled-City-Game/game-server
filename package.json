@@ -1,0 +1,24 @@
+{
+  "name": "game-server",
+  "version": "0.0.1",
+  "description": "Game API server for untitled metro game",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx watch server.ts",
+    "start": "tsx server.ts"
+  },
+  "author": "Michael Turvey",
+  "license": "ISC",
+  "dependencies": {
+    "@types/geojson": "^7946.0.16",
+    "boardgame.io": "^0.50.2",
+    "lodash": "^4.17.21",
+    "point-in-polygon": "^1.1.0",
+    "tsx": "^4.19.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.16",
+    "@types/point-in-polygon": "^1.1.5"
+  }
+}
