@@ -27,7 +27,8 @@ async function buildServer(){
 	server.router.get('/map-data', (ctx) => {
 		ctx.body = mapData;
 	  });
-	server.run(8000, () => console.log("server running..."));
+	const PORT = parseInt(process.env.PORT || "8000");
+	server.run(PORT, () => console.log("server running..."));
 }
 
 buildServer();
