@@ -19,7 +19,7 @@ async function buildServer(){
 	const mapData : GameSetupData = await fetchData();
 	const server = Server({
 		games: [MetroMayhem(mapData.zonePolygons)],
-		origins: [Origins.LOCALHOST, "https://next-metrogame.netlify.app/"],
+		origins: [Origins.LOCALHOST, "https://next-metrogame.netlify.app"],
 	});
 	server.router.get('/hello', (ctx) => {
 		ctx.body = 'Hello ee!';
