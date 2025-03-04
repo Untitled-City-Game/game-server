@@ -1,4 +1,4 @@
-import { Server, Origins } from 'boardgame.io/server';
+import { Server, Origins, FlatFile } from 'boardgame.io/server';
 import {promises as fs} from 'fs';
 import { MetroMayhem } from './game/Game';
 import { LineData, PolyData, GameSetupData } from './types';
@@ -20,6 +20,10 @@ async function buildServer(){
 	const server = Server({
 		games: [MetroMayhem(mapData.zonePolygons)],
 		origins: [Origins.LOCALHOST, "https://next-metrogame.netlify.app"],
+		db: new FlatFile({
+			dir: process.cwd() + '/db',
+			logging: true,
+		})
 	});
 	server.router.get('/hello', (ctx) => {
 		ctx.body = 'Hello ee!';
