@@ -2,7 +2,6 @@ import { GameState, AllPlayersData, PolyData, zoneData, zoneStatus, PlayerData, 
 import type { Ctx, FnContext, Game } from "boardgame.io";
 import { LogAPI } from "boardgame.io/dist/types/src/plugins/plugin-log";
 import { RandomAPI } from "boardgame.io/dist/types/src/plugins/random/random";
-import { log } from "console";
 import challengeDataJSON from '@data/challenges.json'
 const challengeData : ChallengeData = challengeDataJSON
 import { remove } from "lodash";
@@ -25,6 +24,7 @@ function completeChallengeAndClaim(
 	challenge: string,
 	evidence: File
 ) {
+	console.log("complete challenge and claim", zoneID, challenge, "evidence", evidence ? evidence.name : "no evidence")
 	completeChallenge({ G, log, playerID }, challenge, evidence);
 	claimZone({ G, log, playerID }, zoneID);
 	drawToFull({ G, playerID });
@@ -36,9 +36,9 @@ function claimZone(
 	zoneID: number,
 
 ) {
+	console.log("claiming zone", zoneID);
 	const claimedZone = G.zoneData[zoneID];
 	claimedZone.color = G.allPlayersData[playerID].teamColor;
-	console.log("claiming zone", zoneID);
 	log.setMetadata("test");
 	//addLogMetadata({log}, {date: new Date(), zone: zoneID, team: claimedZone.color});
 }
@@ -47,6 +47,7 @@ function completeChallenge({ G, log, playerID }: { G: GameState, log : LogAPI , 
 	challenge: string,
 	evidence: File
 ){
+	console.log("completing challenge", challenge, evidence)
 	discardChallenge({ G, log, playerID }, challenge);
 	addLogMetadata({log}, {date: new Date(), challenge, evidence, team: G.allPlayersData[playerID].teamColor});
 }
@@ -82,6 +83,7 @@ function drawChallenge(
 function drawToFull(
 	{ G, playerID }: { G: GameState, playerID: string },
 ){
+	console.log("drawing to full", playerID)
 	let i = 0;
 	const teamData = G.allTeamsData[G.allPlayersData[playerID].teamColor]
 	while (teamData.challengeHand.length < handSize) {
@@ -99,10 +101,11 @@ function playerSetup(
 	newPlayerData : PlayerData
 ){
 	G.allPlayersData[playerID] = newPlayerData
-	console.log("added player data for", playerID, newPlayerData, newPlayerData.name, newPlayerData.teamColor)
+	console.log("setup player", playerID, newPlayerData, newPlayerData.name, newPlayerData.teamColor)
 }
 
 function startGame({ events, G, random, log }: FnContext<GameState>) {
+	console.log("starting game")
 	//shuffle and create decks
 	events.setActivePlayers({ all: "claim" });
 	teamSetup(G.allTeamsData, random)
