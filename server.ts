@@ -22,7 +22,7 @@ async function buildServer(){
 		origins: [Origins.LOCALHOST, "https://next-metrogame.netlify.app"],
 		db: new FlatFile({
 			dir: process.cwd() + '/db',
-			logging: true,
+			logging: false,
 		})
 	});
 	server.router.get('/hello', (ctx) => {
