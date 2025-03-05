@@ -22,9 +22,9 @@ function completeChallengeAndClaim(
 	{ G, log, playerID }: { G: GameState, log : LogAPI , playerID: string },
 	zoneID: number,
 	challenge: string,
-	evidence: File
+	evidence: string
 ) {
-	console.log("complete challenge and claim", zoneID, challenge, "evidence", evidence ? evidence.name : "no evidence")
+	console.log("complete challenge and claim", zoneID, challenge, "evidence", evidence ? evidence : "no evidence")
 	completeChallenge({ G, log, playerID }, challenge, evidence);
 	claimZone({ G, log, playerID }, zoneID);
 	drawToFull({ G, playerID });
@@ -45,7 +45,7 @@ function claimZone(
 
 function completeChallenge({ G, log, playerID }: { G: GameState, log : LogAPI , playerID: string },
 	challenge: string,
-	evidence: File
+	evidence: string
 ){
 	console.log("completing challenge", challenge, evidence)
 	discardChallenge({ G, log, playerID }, challenge);

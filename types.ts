@@ -84,7 +84,7 @@ export type GameSetupData = {
 
 export type LogMetadata = {
 	date: Date;
-	evidence?: File;
+	evidence?: string;
 	challenge?: string;
 	zone?: number;
 	team: Color;
