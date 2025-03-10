@@ -19,7 +19,7 @@ async function buildServer(){
 	const mapData : GameSetupData = await fetchData();
 	const server = Server({
 		games: [MetroMayhem(mapData.zonePolygons)],
-		origins: [Origins.LOCALHOST, "https://next-metrogame.netlify.app"],
+		origins: [Origins.LOCALHOST, "https://next-metrogame.netlify.app", "https://nextjs-metrogame--metro-game-474bc.us-central1.hosted.app/"],
 		db: new FlatFile({
 			dir: process.cwd() + '/db',
 			logging: false,
